@@ -1,0 +1,12 @@
+{
+  "appId": "com.moonlitfox.hellocap",
+  "appName": "我的待办",
+  "webDir": "www",
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": false,
+      "statsUrl": "",
+      "resetWhenUpdate": true
+    }
+  }
+}

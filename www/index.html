@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <!-- viewport 让网页按手机屏幕宽度显示 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>我的待办</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>我的待办</h1>
+    <p id="env"></p>
+    <p class="update-bar">
+      <span id="version"></span>
+      <button id="check-update" type="button">检查更新</button>
+      <span id="update-status"></span>
+    </p>
+  </header>
+  <form id="form">
+    <input id="input" placeholder="要做什么？" autocomplete="off" />
+    <button type="submit">添加</button>
+  </form>
+  <ul id="list"></ul>
+  <script src="app.js"></script>
+  <script src="updater.js"></script>
+</body>
+</html>
