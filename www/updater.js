@@ -3,7 +3,7 @@
 //  - 改了原生部分（换插件、改权限等）：提示下载新 .apk 安装
 
 // 当前网页版本号，由 scripts/release.sh 自动修改，不要手改
-const WEB_VERSION = '1.2.0';
+const WEB_VERSION = '1.3.0';
 const UPDATE_URL = 'https://github.com/4L-1/hello-capacitor/releases/latest/download/update.json';
 
 // 比较版本号：a 比 b 新返回 true，比如 isNewer('1.2.0', '1.1.9') === true
@@ -25,7 +25,11 @@ async function checkForUpdate(manual) {
   let info;
   try {
     status('正在检查更新…');
-    const res = await CapacitorHttp.get({ url: UPDATE_URL });
+    // 加时间戳参数并禁用缓存，避免拿到旧的 update.json
+    const res = await CapacitorHttp.get({
+      url: UPDATE_URL + '?t=' + Date.now(),
+      headers: { 'Cache-Control': 'no-cache' },
+    });
     if (res.status !== 200) throw new Error('HTTP ' + res.status);
     info = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
   } catch (e) {

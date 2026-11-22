@@ -44,5 +44,5 @@ JSON
 git add -A
 git commit -qm "release v$VERSION"
 git push -q origin HEAD
-gh release create "v$VERSION" "$OUT"/* --repo "$REPO" --title "v$VERSION" --notes "$NOTES"
+gh release create "v$VERSION" "$OUT"/* --repo "$REPO" --title "v$VERSION" --notes "$NOTES" --latest
 echo "已发布 v$VERSION（versionCode $CODE）"
