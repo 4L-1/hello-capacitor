@@ -33,6 +33,7 @@ cat > "$OUT/update.json" <<JSON
 {
   "version": "$VERSION",
   "webZipUrl": "$BASE/web-$VERSION.zip",
+  "webZipSha256": "$(sha256sum "$OUT/web-$VERSION.zip" | cut -d' ' -f1)",
   "apkVersionCode": $CODE,
   "apkUrl": "$BASE/hello-capacitor.apk",
   "notes": "$NOTES"

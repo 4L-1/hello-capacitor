@@ -3,7 +3,7 @@
 //  - 改了原生部分（换插件、改权限等）：提示下载新 .apk 安装
 
 // 当前网页版本号，由 scripts/release.sh 自动修改，不要手改
-const WEB_VERSION = '1.1.1';
+const WEB_VERSION = '1.2.0';
 const UPDATE_URL = 'https://github.com/4L-1/hello-capacitor/releases/latest/download/update.json';
 
 // 比较版本号：a 比 b 新返回 true，比如 isNewer('1.2.0', '1.1.9') === true
@@ -46,7 +46,14 @@ async function checkForUpdate(manual) {
   // 3. 只是网页更旧：热更新
   if (isNewer(info.version, WEB_VERSION)) {
     status('正在下载更新 ' + info.version + '…');
-    const bundle = await CapacitorUpdater.download({ url: info.webZipUrl, version: info.version });
+    let bundle;
+    try {
+      // checksum 是压缩包的 SHA-256，插件下载后会校验，防止文件损坏或被篡改
+      bundle = await CapacitorUpdater.download({ url: info.webZipUrl, version: info.version, checksum: info.webZipSha256 });
+    } catch (e) {
+      status('更新下载失败：' + (e.message || e));
+      return;
+    }
     if (confirm('新版本 ' + info.version + ' 已下载。\n\n' + (info.notes || '') + '\n\n现在重启应用吗？')) {
       await CapacitorUpdater.set(bundle);   // 立即切换并刷新
     } else {
