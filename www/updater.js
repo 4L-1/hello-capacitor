@@ -3,7 +3,7 @@
 //  - 改了原生部分（换插件、改权限等）：提示下载新 .apk 安装
 
 // 当前网页版本号，由 scripts/release.sh 自动修改，不要手改
-const WEB_VERSION = '1.3.1';
+const WEB_VERSION = '1.4.0';
 const UPDATE_URL = 'https://github.com/4L-1/hello-capacitor/releases/latest/download/update.json';
 
 // 比较版本号：a 比 b 新返回 true，比如 isNewer('1.2.0', '1.1.9') === true
